@@ -1,20 +1,21 @@
 package domain;
 
-import java.util.ArrayList;
 
-import javax.persistence.FetchType;
+
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 
+@Entity
 public class Product {
 	 @Id
 	  @GeneratedValue(strategy = GenerationType.IDENTITY)
 	  private Long id;
 	  private String name;
-	  @ManyToOne(fetch = FetchType.LAZY)
-	  private ArrayList<ItemOrder> itemOrders;
+	  private String description;
+	  private Integer quantity;
+	  private Double price;
 	  
 	public Long getId() {
 		return id;
@@ -28,12 +29,25 @@ public class Product {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public ArrayList<ItemOrder> getItemOrders() {
-		return itemOrders;
+	public String getDescription() {
+		return description;
 	}
-	public void setItemOrders(ArrayList<ItemOrder> itemOrders) {
-		this.itemOrders = itemOrders;
+	public void setDescription(String description) {
+		this.description = description;
 	}
+	public Integer getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+	public Double getPrice() {
+		return price;
+	}
+	public void setPrice(Double price) {
+		this.price = price;
+	}
+
 	  
 	  
 }

@@ -1,13 +1,17 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import dao.ProductDao;
 import domain.Client;
+import domain.ItemOrder;
 import domain.Product;
 
 /**
@@ -37,11 +41,23 @@ public class ServletProduct extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Product product = new Product();
+		Product newProduct = new Product();
 		
-		product.setName(request.getParameter("name"));
-		product.set (request.getParameter("email"));
 		
+		newProduct.setName(request.getParameter("name"));
+		newProduct.setPrice(Double.parseDouble(request.getParameter("price")));
+		newProduct.setDescription(request.getParameter("description"));
+		newProduct.setQuantity(Integer.parseInt(request.getParameter("quantity")));
+		
+		
+		
+		ProductDao dao = new ProductDao();
+		dao.save(newProduct);
+		
+		System.out.println(newProduct.getName());
+		System.out.println(newProduct.getPrice());
+		System.out.println(newProduct.getDescription());
+		System.out.println(newProduct.getQuantity());
 	}
 
 }
