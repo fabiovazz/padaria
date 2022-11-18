@@ -8,18 +8,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import domain.Client;
+import domain.Product;
 
 /**
- * Servlet implementation class ServletClient
+ * Servlet implementation class ServletProduct
  */
-@WebServlet("/ServletClient")
-public class ServletClient extends HttpServlet {
+@WebServlet("/ServletProduct")
+public class ServletProduct extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletClient() {
+    public ServletProduct() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,12 +37,10 @@ public class ServletClient extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Client client = new Client();
+		Product product = new Product();
 		
-		client.setName(request.getParameter("name"));
-		client.setEmail(request.getParameter("email"));
-		client.setPhone(request.getParameter("phone"));
-		
+		product.setName(request.getParameter("name"));
+		product.set (request.getParameter("email"));
 		
 	}
 

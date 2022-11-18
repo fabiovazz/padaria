@@ -4,18 +4,16 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Cadastrar cliente</title>
+<title>Cadastrar produto</title>
 </head>
 <body>
-		<h1>Cadastro de Cliente</h1>
+		<h1>Cadastro de produto</h1>
 		
 		<form action="" method="post">
 		<label>Nome</label>
 		<input type="text" name="name" required>
-		<label>E-mail</label>
-		<input type="email" name="email"  required >
-		<label>Telefone</label>
-		<input type="number" name="phone" required >
+		<label>Quantidade</label>
+		<input type="number" name="quantity" required >
 		<button type="submit">Cadastrar</button>
 		</form>
 </body>
