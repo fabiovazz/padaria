@@ -1,7 +1,6 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,8 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import dao.ProductDao;
-import domain.Client;
-import domain.ItemOrder;
 import domain.Product;
 
 /**
@@ -33,8 +30,12 @@ public class ServletProduct extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		ProductDao dao = new ProductDao();
+		long productId = Long.parseLong(request.getParameter("id"));
+		Product product = dao.findById(Product.class, productId).get();
+		
+		dao.delete(product);
+		response.sendRedirect("ListProducts.jsp");
 	}
 
 	/**
@@ -42,22 +43,26 @@ public class ServletProduct extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Product newProduct = new Product();
-		
-		
-		newProduct.setName(request.getParameter("name"));
-		newProduct.setPrice(Double.parseDouble(request.getParameter("price")));
-		newProduct.setDescription(request.getParameter("description"));
-		newProduct.setQuantity(Integer.parseInt(request.getParameter("quantity")));
-		
-		
-		
 		ProductDao dao = new ProductDao();
-		dao.save(newProduct);
 		
-		System.out.println(newProduct.getName());
-		System.out.println(newProduct.getPrice());
-		System.out.println(newProduct.getDescription());
-		System.out.println(newProduct.getQuantity());
+		if (request.getParameter("productId") == null) 
+		{
+			newProduct.setName(request.getParameter("name"));
+			newProduct.setPrice(Double.parseDouble(request.getParameter("price")));
+			newProduct.setDescription(request.getParameter("description"));
+			newProduct.setQuantity(Integer.parseInt(request.getParameter("quantity")));
+			dao.save(newProduct);
+		}
+		else {
+			long productId = Long.parseLong(request.getParameter("productId"));
+			Product product = dao.findById(Product.class, productId).get();
+			product.setName(request.getParameter("name"));
+			product.setPrice(Double.parseDouble(request.getParameter("price")));
+			product.setDescription(request.getParameter("description"));
+			product.setQuantity(Integer.parseInt(request.getParameter("quantity")));
+			dao.update(product);
+		}
+		response.sendRedirect("ListProducts.jsp");
 	}
 
 }
