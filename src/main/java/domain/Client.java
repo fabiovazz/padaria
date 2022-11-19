@@ -21,6 +21,17 @@ public class Client {
 	  @OneToMany(mappedBy="client")
 	  private Set<Order> orders;  
 	  
+	  
+	  
+	public Long getId() {
+		return id;
+	}
+	public Set<Order> getOrders() {
+		return orders;
+	}
+	public void setOrders(Set<Order> orders) {
+		this.orders = orders;
+	}
 	public String getName() {
 		return name;
 	}
