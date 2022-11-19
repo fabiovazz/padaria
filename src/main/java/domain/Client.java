@@ -1,11 +1,16 @@
 package domain;
 
+import java.util.Set;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "clients")
 public class Client {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -13,6 +18,8 @@ public class Client {
 	  private String name;
 	  private String email;
 	  private String phone;
+	  @OneToMany(mappedBy="client")
+	  private Set<Order> orders;  
 	  
 	public String getName() {
 		return name;
