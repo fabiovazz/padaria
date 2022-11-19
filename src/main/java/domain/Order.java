@@ -1,53 +1,47 @@
 package domain;
 
-
-import java.util.Date;
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Order {
-	 @Id
-	  @GeneratedValue(strategy = GenerationType.IDENTITY)
-	  private Long id;
-	  @OneToOne(fetch = FetchType.LAZY)
-	  private Client client;
-	  @OneToMany(fetch = FetchType.LAZY)
-	  private List<ItemOrder> itemOrders;
-	  
-	  private Date dateOrder;
-	  
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String name;
+	private String description;
+	private Integer quantity;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "client_id", nullable = false)
+	private Client client;
+	
 	public Long getId() {
 		return id;
 	}
-	public void setId(Long id) {
-		this.id = id;
+	public String getName() {
+		return name;
 	}
-	public Client getClient() {
-		return client;
+	public void setName(String name) {
+		this.name = name;
 	}
-	public void setClient(Client client) {
-		this.client = client;
+	public String getDescription() {
+		return description;
 	}
-	public List<ItemOrder> getItemOrders() {
-		return itemOrders;
+	public void setDescription(String description) {
+		this.description = description;
 	}
-	public void setItemOrders(List<ItemOrder> itemOrders) {
-		this.itemOrders = itemOrders;
+	public Integer getQuantity() {
+		return quantity;
 	}
-	public Date getDateOrder() {
-		return dateOrder;
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
-	public void setDateOrder(Date dateOrder) {
-		this.dateOrder = dateOrder;
-	}
-	  
-	  
+
+	
 }

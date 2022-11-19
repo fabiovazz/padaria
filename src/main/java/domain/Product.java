@@ -17,6 +17,7 @@ public class Product {
 	  private Integer quantity;
 	  private Double price;
 	  
+	  
 	public Long getId() {
 		return id;
 	}
