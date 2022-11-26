@@ -1,12 +1,10 @@
 package domain;
 
-import java.util.Set;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -19,8 +17,6 @@ public class Product {
 	private String description;
 	private Integer quantity;
 	private Double price;
-	@OneToMany(mappedBy = "product")
-	private Set<Item> items;
 
 	public Long getId() {
 		return id;

@@ -24,7 +24,7 @@ public class Order {
 	private Client client;
 
 	@OneToMany(mappedBy="order")
-	private Set<ItemOrder> itemOrders;
+	private Set<OrderProduct> orderProducts;
 
 	private Date dateOrder;
 
