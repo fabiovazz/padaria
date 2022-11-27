@@ -22,11 +22,18 @@ public class OrderProduct {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "order_id", nullable = false)
 	private Order order;
-
+	
 	public Long getId() {
 		return id;
 	}
+	
+	public Product getProduct() {
+		return product;
+	}
 
+	public void setProduct(Product product) {
+		this.product = product;
+	}
 
 	public Order getOrder() {
 		return order;
@@ -34,8 +41,6 @@ public class OrderProduct {
 
 	public void setOrder(Order order) {
 		this.order = order;
-	}
-
-	
+	}	
 
 }

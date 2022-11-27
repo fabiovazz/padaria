@@ -1,6 +1,6 @@
 package domain;
 
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,17 +19,17 @@ public class Client {
 	  private String email;
 	  private String phone;
 	  @OneToMany(mappedBy="client")
-	  private Set<Order> orders;  
+	  private List<Order> orders;  
 	  
 	  
 	  
 	public Long getId() {
 		return id;
 	}
-	public Set<Order> getOrders() {
+	public List<Order> getOrders() {
 		return orders;
 	}
-	public void setOrders(Set<Order> orders) {
+	public void setOrders(List<Order> orders) {
 		this.orders = orders;
 	}
 	public String getName() {

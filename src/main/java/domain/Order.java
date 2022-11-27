@@ -1,7 +1,7 @@
 package domain;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.List;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,12 +24,28 @@ public class Order {
 	private Client client;
 
 	@OneToMany(mappedBy="order")
-	private Set<OrderProduct> orderProducts;
+	private List<OrderProduct> orderProducts;
 
 	private Date dateOrder;
 
 	public Long getId() {
 		return id;
+	}
+
+	public Client getClient() {
+		return client;
+	}
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+
+	public List<OrderProduct> getOrderProducts() {
+		return orderProducts;
+	}
+
+	public void setOrderProducts(List<OrderProduct> orderProducts) {
+		this.orderProducts = orderProducts;
 	}
 
 	public Date getDateOrder() {
@@ -39,5 +55,7 @@ public class Order {
 	public void setDateOrder(Date dateOrder) {
 		this.dateOrder = dateOrder;
 	}
+
+	
 
 }

@@ -15,7 +15,6 @@ public class Product {
 	private Long id;
 	private String name;
 	private String description;
-	private Integer quantity;
 	private Double price;
 
 	public Long getId() {
@@ -40,14 +39,6 @@ public class Product {
 
 	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public Integer getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
 	}
 
 	public Double getPrice() {

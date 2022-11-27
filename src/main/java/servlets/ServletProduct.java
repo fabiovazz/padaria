@@ -50,7 +50,6 @@ public class ServletProduct extends HttpServlet {
 			newProduct.setName(request.getParameter("name"));
 			newProduct.setPrice(Double.parseDouble(request.getParameter("price")));
 			newProduct.setDescription(request.getParameter("description"));
-			newProduct.setQuantity(Integer.parseInt(request.getParameter("quantity")));
 			dao.save(newProduct);
 		}
 		else {
@@ -59,7 +58,6 @@ public class ServletProduct extends HttpServlet {
 			product.setName(request.getParameter("name"));
 			product.setPrice(Double.parseDouble(request.getParameter("price")));
 			product.setDescription(request.getParameter("description"));
-			product.setQuantity(Integer.parseInt(request.getParameter("quantity")));
 			dao.update(product);
 		}
 		response.sendRedirect("ListProducts.jsp");

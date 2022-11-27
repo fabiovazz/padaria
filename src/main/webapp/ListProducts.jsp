@@ -35,8 +35,6 @@
 			<tr>
 				<td><%=product.getName() %></td>
 				<td><%=product.getDescription() %></td>
-				<td><%=product.getQuantity() %> </td>
-				<td><%=product.getQuantity() %> </td>
 				<td><%=product.getPrice() %> </td>
 				<td>
 					<a href="EditProduct.jsp?id=<%=product.getId()%>">Editar</a>
