@@ -23,8 +23,6 @@
 		<input type="text" name="name" value="<%= product.getName() %>" required>
 		<label>Descrição</label>
 		<input type="text" name="description" value="<%= product.getDescription() %>"  required >
-		<label>Quantidade</label>
-		<input type="number" name="quantity" value="<%=product.getQuantity() %>" required >
 		<label>Preco</label>
 		<input type="number" value="<%=product.getPrice()%>" min="0.00" max="10000.00" step="0.01" name="price" required >
 		<button type="submit">Atualizar</button>

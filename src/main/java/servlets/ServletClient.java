@@ -60,6 +60,7 @@ public class ServletClient extends HttpServlet {
 			client.setEmail(request.getParameter("email"));
 			client.setPhone(request.getParameter("phone"));
 			dao.update(client);
+			
 		}
 		response.sendRedirect("ListClients.jsp");
 	}

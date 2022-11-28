@@ -23,10 +23,19 @@ public class Order {
 	@JoinColumn(name = "client_id", nullable = true)
 	private Client client;
 
-	@OneToMany(mappedBy="order")
+	@OneToMany(mappedBy = "order")
 	private List<OrderProduct> orderProducts;
 
 	private Date dateOrder;
+	private Boolean finished;
+
+	public Boolean getFinished() {
+		return finished;
+	}
+
+	public void setFinished(Boolean finished) {
+		this.finished = finished;
+	}
 
 	public Long getId() {
 		return id;
@@ -55,7 +64,5 @@ public class Order {
 	public void setDateOrder(Date dateOrder) {
 		this.dateOrder = dateOrder;
 	}
-
-	
 
 }

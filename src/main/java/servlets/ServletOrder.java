@@ -80,6 +80,8 @@ public class ServletOrder extends HttpServlet {
 
 		order.setClient(client);
 		order.setDateOrder(dateOrder);
+		
+		order.setFinished(request.getParameter("finished").equals("yes")? true : false );
 		orderDao.save(order);
 
 		for (String productId : productsSelected) {

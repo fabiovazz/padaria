@@ -5,7 +5,7 @@
 <%@page import="java.util.List"%>
 <%@page import="dao.ClientDao"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -14,40 +14,49 @@
 </head>
 
 <%
-	ClientDao clientDao = new ClientDao();
-	List<Client> clients = clientDao.findAll(Client.class);
-	ProductDao productDao = new ProductDao();
-	List<Product> products = productDao.findAll(Product.class);
+ClientDao clientDao = new ClientDao();
+List<Client> clients = clientDao.findAll(Client.class);
+ProductDao productDao = new ProductDao();
+List<Product> products = productDao.findAll(Product.class);
 %>
 
 <body>
-		<h1>Realizar Pedido</h1>
-		
-		
-		<form action="ServletOrder" method="post">		
-		<label for="clients">Cliente:</label>	
-		<select name="client" id="clients" required>
-		 <option value="" disabled selected>Selecione</option>
-		    <%
-				for(Client client : clients){
+	<h1>Realizar Pedido</h1>
+	<form action="ServletOrder" method="post">
+		<label for="clients">Cliente:</label> <select name="client"
+			id="clients" required>
+			<option value="" disabled selected>Selecione</option>
+			<%
+			for (Client client : clients) {
 			%>
 			<option value=<%=client.getId()%>><%=client.getName()%></option>
-		<% }%>
-		</select>
-		<label for="products">Produto</label>
-		<select name="product" id="products" required multiple="multiple">
-		<option value="" disabled>Carrinho</option>		
 			<%
-				for(Product product : products){
-			%>		
+			}
+			%>
+		</select> <label for="products">Produto</label> <select name="product"
+			id="products" required multiple="multiple">
+			<option value="" disabled>Carrinho</option>
+			<%
+			for (Product product : products) {
+			%>
 			<option value=<%=product.getId()%>><%=product.getName()%>
-		
-		<%} %>
-		</select>
-		<input name="dateOrder" type="datetime-local" />
-		<button name="action" value="finishOrder" type="submit">Finalizar Pedido</button>
-		</form>
-		
-		
+
+				<%
+				}
+				%>
+			
+		</select> <input name="dateOrder" type="datetime-local" />
+		<div>
+			<input type="radio" id="yes" name="finished" value="yes" />
+			<label for="yes">Sim</label> 
+			<input type="radio"id="no" name="finished" value="no" /> 
+			<label for="no">Não</label>
+		</div>
+
+		<button name="action" value="finishOrder" type="submit">Finalizar
+			Pedido</button>
+	</form>
+
+
 </body>
 </html>

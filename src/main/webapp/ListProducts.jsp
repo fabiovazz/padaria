@@ -14,7 +14,6 @@
 <%
 	ProductDao productDao = new ProductDao();
 	List<Product> products = productDao.findAll(Product.class);
-	
 %>
 	<h1>Produtos Cadastrados</h1>
 	<div class="container">
@@ -41,7 +40,6 @@
 					
 					<a href="<%= request.getContextPath()%>/ServletProduct?id=<%=product.getId()%>">Excluir</a>
 				 </td>
-				
 			</tr>
 			<% }%>
 		</tbody>
