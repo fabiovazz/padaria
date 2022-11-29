@@ -42,8 +42,11 @@ public class ServletOrder extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		OrderDao orderDao = new OrderDao();
+		long orderId = Long.parseLong(request.getParameter("id"));
+		Order order = orderDao.findById(Order.class, orderId).get();
+		orderDao.delete(order);
+		response.sendRedirect("ListOrders.jsp");
 	}
 
 	/**
@@ -64,19 +67,17 @@ public class ServletOrder extends HttpServlet {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-		
+
 		if (request.getParameter("orderId") == null) {
 
-
 			Order order = new Order();
-			
 
 			ProductDao productDao = new ProductDao();
 			ArrayList<Product> products = new ArrayList<Product>();
 			String[] productsSelected = request.getParameterValues("product");
 
 			Client client = new Client();
-			
+
 			Long clientId = Long.parseLong(request.getParameter("client"));
 
 			client = clientDao.findById(Client.class, clientId).get();
@@ -117,4 +118,3 @@ public class ServletOrder extends HttpServlet {
 	}
 
 }
-
