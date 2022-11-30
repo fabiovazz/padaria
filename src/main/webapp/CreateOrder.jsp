@@ -56,7 +56,5 @@ List<Product> products = productDao.findAll(Product.class);
 		<button name="action" value="finishOrder" type="submit">Finalizar
 			Pedido</button>
 	</form>
-
-
 </body>
 </html>

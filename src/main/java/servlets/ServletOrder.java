@@ -42,8 +42,11 @@ public class ServletOrder extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		OrderDao orderDao = new OrderDao();
+		long orderId = Long.parseLong(request.getParameter("id"));
+		Order order = orderDao.findById(Order.class, orderId).get();
+		orderDao.delete(order);
+		response.sendRedirect("ListOrders.jsp");
 	}
 
 	/**
@@ -52,20 +55,9 @@ public class ServletOrder extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
-		OrderProductDao orderProductDao = new OrderProductDao();
-
-		Order order = new Order();
-		OrderDao orderDao = new OrderDao();
-
-		ProductDao productDao = new ProductDao();
-		ArrayList<Product> products = new ArrayList<Product>();
-		String[] productsSelected = request.getParameterValues("product");
-
-		Client client = new Client();
 		ClientDao clientDao = new ClientDao();
-		Long clientId = Long.parseLong(request.getParameter("client"));
-
+		OrderDao orderDao = new OrderDao();
+		OrderProductDao orderProductDao = new OrderProductDao();
 		Date dateOrder = null;
 		String dateOrderText = request.getParameter("dateOrder");
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
@@ -75,34 +67,56 @@ public class ServletOrder extends HttpServlet {
 		} catch (ParseException e) {
 			e.printStackTrace();
 		}
-
-		client = clientDao.findById(Client.class, clientId).get();
-
-		order.setClient(client);
-		order.setDateOrder(dateOrder);
 		
-		order.setFinished(request.getParameter("finished").equals("yes")? true : false );
-		orderDao.save(order);
+		if (request.getParameter("orderId") == null) {
 
-		for (String productId : productsSelected) {
-			products.add(productDao.findById(Product.class, Long.parseLong(productId)).get());
+
+			Order order = new Order();
+			
+
+			ProductDao productDao = new ProductDao();
+			ArrayList<Product> products = new ArrayList<Product>();
+			String[] productsSelected = request.getParameterValues("product");
+
+			Client client = new Client();
+			
+			Long clientId = Long.parseLong(request.getParameter("client"));
+
+			client = clientDao.findById(Client.class, clientId).get();
+
+			order.setClient(client);
+			order.setDateOrder(dateOrder);
+
+			order.setFinished(request.getParameter("finished").equals("yes") ? true : false);
+			orderDao.save(order);
+
+			for (String productId : productsSelected) {
+				products.add(productDao.findById(Product.class, Long.parseLong(productId)).get());
+			}
+
+			OrderProduct[] orderProduct = new OrderProduct[products.size()];
+			Product[] productArray = new Product[products.size()];
+			for (int i = 0; i < products.size(); i++) {
+				orderProduct[i] = new OrderProduct();
+				productArray[i] = new Product();
+			}
+
+			for (int i = 0; i < orderProduct.length; i++) {
+				orderProduct[i].setProduct(products.get(i));
+				orderProduct[i].setOrder(order);
+				orderProductDao.save(orderProduct[i]);
+			}
+		} else {
+			Long id = Long.parseLong(request.getParameter("orderId"));
+			Long clientId = Long.parseLong(request.getParameter("client"));
+			Client client = clientDao.findById(Client.class, clientId).get();
+			Order order = orderDao.findById(Order.class, id).get();
+			order.setClient(client);
+			order.setDateOrder(dateOrder);
+			order.setFinished(request.getParameter("finished").equals("yes") ? true : false);
+			orderDao.save(order);
 		}
-
-		OrderProduct[] orderProduct = new OrderProduct[products.size()];
-		Product[] productArray = new Product[products.size()];
-		for (int i = 0; i < products.size(); i++) {
-			orderProduct[i] = new OrderProduct();
-			productArray[i] = new Product();
-		}
-
-		System.out.println("tamanho " + orderProduct.length);
-
-		for (int i = 0; i < orderProduct.length; i++) {
-			orderProduct[i].setProduct(products.get(i));
-			orderProduct[i].setOrder(order);
-			orderProductDao.save(orderProduct[i]);
-		}
-
+		response.sendRedirect("ListOrders.jsp");
 	}
 
 }

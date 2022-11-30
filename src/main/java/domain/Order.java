@@ -12,6 +12,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -24,6 +27,7 @@ public class Order {
 	private Client client;
 
 	@OneToMany(mappedBy = "order")
+	@Cascade({CascadeType.SAVE_UPDATE,CascadeType.DELETE})
 	private List<OrderProduct> orderProducts;
 
 	private Date dateOrder;
