@@ -28,8 +28,8 @@
 		<thead>
 			<tr>
 				<th>Nome</th>
-				<th>Descricï¿½o</th>
-				<th>Preï¿½o</th>
+				<th>Descrição</th>
+				<th>Preço</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -51,9 +51,33 @@
 	</table>
 	</div>
 </div>
+<div class="btnmenu">
+		<a class="menu" href="Home.jsp"><button>Menu</button></a>
+</div>
 </body>
 </html>
 <style>
+.btnmenu{
+	display:flex;
+	justify-content:center;
+}
+.menu button{
+	width: 150px;
+	height: 50px;
+	background-color: #ffff;
+	border-color: #79e1ee;
+	border-radius: 10px;
+	font-weight: bold;
+	
+}
+.menu button:hover{
+	background-color: #79e1ee;
+	color: #ffff;
+	font-weight: bold;
+	border-color: #79e1ee;
+	border-radius: 10px;
+	cursor:pointer;
+}
   body {
     background: #79e1ee;
     font-family: monospace;
