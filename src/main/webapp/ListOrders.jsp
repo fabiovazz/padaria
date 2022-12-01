@@ -9,8 +9,10 @@
 <!DOCTYPE html>
 <html>
 <head>
+<meta charset="ISO-8859-1">
 <meta charset="UTF-8">
 <title>Lista de produtos</title>
+
 </head>
 <body>
 
@@ -19,6 +21,7 @@
 	OrderDao orderDao = new OrderDao();
 	List<Order> orders = orderDao.findAll(Order.class);
 %>
+<div class="align">
 	<h1>Pedidos Realizados</h1>
 	<div class="container">
 	<a class="addProduct" href="CreateOrder.jsp">Novo Pedido</a>
@@ -28,6 +31,8 @@
 				<th>Cliente</th>
 				<th>Data de entrega</th>
 				<th>Finalizado</th>
+				<th></th>
+				
 			</tr>
 		</thead>
 		<tbody>
@@ -47,6 +52,7 @@
 			<% }%>
 		</tbody>
 	</table>
+	</div>
 	</div>
 </body>
 </html>

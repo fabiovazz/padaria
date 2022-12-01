@@ -15,16 +15,19 @@
 	ProductDao productDao = new ProductDao();
 	List<Product> products = productDao.findAll(Product.class);
 %>
-	<h1>Produtos Cadastrados</h1>
-	<div class="container">
-	<a class="addProduct" href="CreateProduct.jsp">Novo Produto</a>
+	<div class="align">
+      <h1>Produtos Cadastrados</h1>
+      <div class="container">
+        <a class="addProduct" href="CreateProduct.jsp">Novo Produto</a>
 	<table class="table-containerProducts">
 		<thead>
 			<tr>
 				<th>Nome</th>
-				<th>Descricação</th>
-				<th>Quantidade</th>
-				<th>Preço</th>
+				<th>Descricaï¿½ï¿½o</th>
+				<th>Preï¿½o</th>
+				<th></th>
+				<th></th>
+				
 			</tr>
 		</thead>
 		<tbody>
@@ -34,19 +37,23 @@
 			<tr>
 				<td><%=product.getName() %></td>
 				<td><%=product.getDescription() %></td>
+			
 				<td><%=product.getPrice() %> </td>
 				<td>
 					<a href="EditProduct.jsp?id=<%=product.getId()%>">Editar</a>
-					
+					</td>
+					<td>
 					<a href="<%= request.getContextPath()%>/ServletProduct?id=<%=product.getId()%>">Excluir</a>
 				 </td>
 			</tr>
 			<% }%>
 		</tbody>
 	</table>
-	</div>
+	   </div>
+    </div>
 </body>
 </html>
+
 <style>
   body {
     background: #79e1ee;
