@@ -18,15 +18,17 @@
 	List<Client> clients = clientDao.findAll(Client.class);
 	
 %>
+	<div class="align">
 	<h1>Clientes Cadastrados</h1>
 	<div class="container">
-	<a class="addClient" href="CreateClient.jsp">Novo Cliente</a>
+	<a class="addProduct" href="CreateClient.jsp">Novo Cliente</a>
 	<table class="table-containerClient">
 		<thead>
 			<tr>
 				<th>Nome</th>
 				<th>E-Mail</th>
 				<th>Telefone</th>
+				<th></th>
 			</tr>
 		</thead>
 		<tbody>
@@ -47,6 +49,7 @@
 			<% }%>
 		</tbody>
 	</table>
+	</div>
 	</div>
 </body>
 </html>
