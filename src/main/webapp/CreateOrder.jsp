@@ -12,7 +12,11 @@
 <meta charset="ISO-8859-1">
 <title>Realizar Pedido</title>
 </head>
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
 
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	
+	<link rel="stylesheet" href="css/style.css">
 <%
 ClientDao clientDao = new ClientDao();
 List<Client> clients = clientDao.findAll(Client.class);
@@ -21,8 +25,10 @@ List<Product> products = productDao.findAll(Product.class);
 %>
 
 <body>
+<div class="align">
 	<h1>Realizar Pedido</h1>
 	<form action="ServletOrder" method="post">
+	<div class="row">
 		<label for="clients">Cliente:</label> <select name="client"
 			id="clients" required>
 			<option value="" disabled selected>Selecione</option>
@@ -33,30 +39,110 @@ List<Product> products = productDao.findAll(Product.class);
 			<%
 			}
 			%>
-		</select> <label for="products">Produto</label> <select name="product"
-			id="products" required multiple="multiple">
+		</select> 
+		
+		<label for="products">Produto</label> 
+		
+		<select class="choose" name="product" id="products" required multiple="multiple">
 			<option value="" disabled>Carrinho</option>
+			
 			<%
 			for (Product product : products) {
 			%>
 			<option value=<%=product.getId()%>><%=product.getName()%>
-
-				<%
-				}
-				%>
+		<%
+		}
+		%>
 			
-		</select> <input name="dateOrder" type="datetime-local" />
-		<div>
-			<input type="radio" id="yes" name="finished" value="yes" />
-			<label for="yes">Sim</label> 
-			<input type="radio"id="no" name="finished" value="no" /> 
-			<label for="no">Não</label>
+		</select> 
+		<div style="margin-top: 20px;">
+			<input name="dateOrder" type="datetime-local" />
+			</div>
+		<div style="margin-top: 20px;">
+			<div class="check">
+				<input class="radio" type="radio" id="yes" name="finished" value="yes" />
+				<label for="yes">Sim</label> 
+			</div>
+			<div class="check">
+				<input class="radio" type="radio"id="no" name="finished" value="no" /> 
+				<label for="no">Nï¿½o</label>
+			</div>
 		</div>
 
 		<button name="action" value="finishOrder" type="submit">Finalizar
 			Pedido</button>
+			</div>
 	</form>
-
-
+	</div>
 </body>
 </html>
+<style>
+body{
+    background: #79e1ee;
+    font-family: monospace;
+}
+
+h1{
+	color: #333;
+	font-family: monospace;
+}
+
+.align{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.align .row{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+}
+
+.align .row label {
+font-size: 20px;
+    margin-bottom: 5px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.align .row input {
+	border-radius: 10px;
+    box-shadow: 0px 1px 4px 0px #0000004f;
+    border: none;
+    width: 400px;
+    height:36px;
+}
+
+.align .row select {
+	border-radius: 10px;
+    box-shadow: 0px 1px 4px 0px #0000004f;
+    border: none;
+    width: 400px;
+    height:36px;
+}
+
+.align .row select.choose {
+	border-radius: 0;
+	height: auto;
+}
+
+.align .row .check{
+display: flex;
+    gap: 10px;
+    }
+
+.align .row input.radio {
+    box-shadow: none;
+    cursor: pointer;
+    width: 24px;
+}
+
+.align .row button{
+	background-color: #333;
+    margin-top: 10px;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    height: 40px;
+}
+</style>
